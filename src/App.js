@@ -5,6 +5,7 @@ import Views from "./Views"
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
+// import Footer from './components/footer/Footer';
 
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
       <main>
         <BrowserRouter>
           <Header />
-          <Views />
-        </BrowserRouter>
+          <Views />    
+        </BrowserRouter>       
       </main>
+      {/* <Footer /> */}
     </ThemeProvider>
 
 

@@ -32,7 +32,7 @@ const Articles = ({ posts }) => {
     }
     return (
         <Box className={classes.root}>
-            <Box sx={{ xs: { width: '100%' }, md: { width: '50%' } }}>
+            <Box position='static' sx={{ xs: { width: '100%' }, md: { width: '50%' } }}>
                 {_POSTS.currentData().length > 0 && (_POSTS.currentData().map(post => (
                     <React.Fragment key={post._id}>
                         <Box className={classes.content}>

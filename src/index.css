@@ -30,7 +30,7 @@ main {
   margin: 0 auto;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .bigLetter{
   font-size: 3rem;

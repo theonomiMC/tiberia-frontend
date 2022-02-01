@@ -40,9 +40,9 @@ const SinglePage = () => {
   const [editMode, setEditMode] = useState(false);
   const [posts, setPosts] = useState([])
 
-  let currentIdx = posts.length && posts.findIndex(el => el.title === singlePost.title);
-  let nextPage = posts.length && getNextPage(posts, currentIdx);
-  let prevPage = posts.length && getPrevPage(posts, currentIdx);
+  let currentIdx = posts.findIndex(el => el.title === singlePost.title);
+  let nextPage = getNextPage(posts, currentIdx);
+  let prevPage = getPrevPage(posts, currentIdx);
 
   const classes = useStyles()
 

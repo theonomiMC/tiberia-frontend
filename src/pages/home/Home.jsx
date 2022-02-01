@@ -4,7 +4,7 @@ import axios from 'axios'
 import { AuthContext } from "../../context/AuthContext";
 import Posts from "../../components/Posts/Posts";
 import Loader from "../../components/Loader";
-
+import Footer from '../../components/footer/Footer'
 const LazyDashboard = lazy(() => import("../../components/dashboard/Dashboard"));
 
 const Home = () => {
@@ -25,6 +25,7 @@ const Home = () => {
       <Suspense fallback={<Loader />}>
         <LazyDashboard posts={posts} />
         <Posts posts={posts} search={search} />
+        <Footer />
       </Suspense>
 
     </>

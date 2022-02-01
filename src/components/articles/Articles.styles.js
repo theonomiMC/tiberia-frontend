@@ -50,7 +50,8 @@ export const useStyles = makeStyles({
     bigContent: {
         width: '95%',
         textAlign: 'right',
-        padding: '1em',
+        padding: '.5em',
+        margin:'.5em auto',
         "& img": {
             height: 178,
             width: '100%',
