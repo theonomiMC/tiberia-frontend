@@ -1,0 +1,15 @@
+.no-match{
+     text-align: center;
+     color:#24252f;
+    margin-bottom: 3em;
+}
+.err-title{
+    font-size: clamp(5rem, 40vmin, 20rem);
+   text-shadow: 45px 25px 4px #777,
+   25px 15px 1px #777;
+   margin-bottom: 0.2em;
+}
+.err-subtitle{
+    color:#999;
+    text-transform: capitalize;
+}
