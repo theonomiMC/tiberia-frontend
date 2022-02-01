@@ -4,9 +4,9 @@ import { Reducer } from './Reducer'
 const initialState = {
     auth: JSON.parse(localStorage.getItem('auth')) || null,
 }
-// 'https://tiberia-server.herokuapp.com' ||
 export const AuthContext = createContext(initialState)
-const SERVER = 'http://localhost:5000'
+// const SERVER = 'http://localhost:5000'
+const SERVER = 'https://tiberia-server.herokuapp.com'
 
 export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState)
