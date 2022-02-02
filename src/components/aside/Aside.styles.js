@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
     root: {
         width: '100%',
-        marginBottom: '1em',
+        marginBottom: '.5em',
 
         "& .MuiChip-root": {
             margin: '.5em',

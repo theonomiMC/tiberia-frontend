@@ -11,10 +11,13 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   display: 'flex',
-  backgroundColor:'rgba(255,255,255,50%)',
-  borderRadius:'50%',
+  backgroundColor: 'rgba(255,255,255,50%)',
+  borderRadius: '50%',
   justifyContent: 'center',
   p: 4,
+  '& svg': {
+    cursor: 'pointer',
+  },
 };
 
 const SettingsModal = ({ children, ...rest }) => {
@@ -34,7 +37,7 @@ const SettingsModal = ({ children, ...rest }) => {
         aria-describedby="modal-modal-description"
         {...rest}
       >
-        <Box sx={style} onClick={handleClose}> 
+        <Box sx={style} onClick={handleClose}>
           {children}
         </Box>
       </Modal>

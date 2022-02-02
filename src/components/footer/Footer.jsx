@@ -42,8 +42,19 @@ const Footer = () => {
                     <LinkedInIcon />
                 </IconButton>
             </ButtonGroup>
-            <Typography>“No great mind has ever existed without a touch of madness.”</Typography>
-            <Typography variant='body2'>― Aristotle</Typography>
+            <div style={{ margin: '.4em' }}>
+                <Typography sx={{ fontFamily: 'Quintessential' }}><q>No great mind has ever existed without a touch of madness.</q></Typography>
+                <Typography variant='body1'>― Aristotle</Typography>
+                <Typography sx={{ 
+                    marginTop: '1em', 
+                    letterSpacing: 1.6,
+                    fontFamily:'slick, cinzel',
+                     }}>&copy;
+                    {' '}
+                    Tiberia{' '}{new Date().getFullYear()}
+                </Typography>
+            </div>
+
         </footer>
 
 

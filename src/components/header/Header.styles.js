@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme) => ({
       color: 'White',
       cursor: 'pointer'
     },
+
     "& .MuiAppBar-root": {
       backgroundColor: '#24252f',
       display: 'block',
@@ -40,21 +41,23 @@ export const useStyles = makeStyles((theme) => ({
     padding: '1.2em 0',
     borderBottom: '1px solid #e7e7e7',
     "& h1": {
-      fontSize: '4rem',
+      fontSize: '3.5rem',
+      marginLeft: 4,
+      fontFamily: 'Neonderthaw',
       fontWeight: 700,
-      textShadow:'-1px -2px white, -3px 2px grey',
-      color:'#201e1e', 
-      "&::first-letter":{
-        color:'#FFC600', 
-        fontSize:'5.5rem', 
-        textShadow:'-1px -2px white, -3px 2px grey'
+      textShadow: '-1px -2px white, -3px 2px grey',
+      color: '#201e1e',
+      "&::first-letter": {
+        color: '#FFC600',
+        fontSize: '5.5rem',
+        textShadow: '-1px -2px white, -3px 2px grey'
       },
       "@media (max-width:600px)": {
-        fontSize:'3rem',
-        "&::first-letter":{
-          fontSize:'4.4rem',
-        } 
-    },
+        fontSize: '3rem',
+        "&::first-letter": {
+          fontSize: '4.4rem',
+        }
+      },
     }
   },
   bottomBar: {

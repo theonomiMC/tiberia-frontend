@@ -90,8 +90,7 @@ const Header = () => {
                 {/* Middle header with site title */}
                 <Box className={classes.middlebar}>
                     <Toolbar>
-                        <Typography variant='h1'
-                            sx={{ marginLeft: 4, fontFamily: 'Cinzel' }}>
+                        <Typography variant='h1'>                    
                             <Link to='/' style={{ color: 'inherit' }}>TiBeria</Link>
                         </Typography>
                     </Toolbar>

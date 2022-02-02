@@ -2,11 +2,14 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
     typography: {
-        fontFamily: ['"Merriweather"',
-            'serif',
+        fontFamily: [
+            "Merriweather",
             'Roboto',
-            'Cinzel',
-            'Playfair Display'
+            'Playfair Display',
+            'Neonderthaw',
+            'Quintessential',
+            'Rowdies, cursive',
+            'serif'    
         ].join(','),
         h1: {
             fontSize: '1.7rem',

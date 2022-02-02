@@ -13,7 +13,7 @@ const ActionBtns = ({ handleDelete, setEditMode, ...rest }) => {
                 onClick={handleDelete}
                 animation={trash}
                 size={65}
-                style={{ paddingLeft: 10, cursor:'pointer' }} />
+                style={{ paddingLeft: 10, cursor:'pointer' }} {...rest} />
 
             <UseAnimations
                 aria-label="edit"
@@ -25,7 +25,7 @@ const ActionBtns = ({ handleDelete, setEditMode, ...rest }) => {
                 speed={.5}
                 size={70}
                 wrapperStyle={{ marginTop: '7px' }}
-                style={{ paddingLeft: 10, cursor:'pointer' }} />
+                style={{ paddingLeft: 10, cursor:'pointer' }} {...rest} />
         </>
 
     )

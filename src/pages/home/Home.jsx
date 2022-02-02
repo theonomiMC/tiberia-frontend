@@ -24,10 +24,10 @@ const Home = () => {
     <>
       <Suspense fallback={<Loader />}>
         <LazyDashboard posts={posts} />
-        <Posts posts={posts} search={search} />
-        <Footer />
       </Suspense>
-
+      <Posts posts={posts} search={search} />
+      {/* <Posts posts={posts} search={search} /> */}
+      <Footer />
     </>
   )
 }
