@@ -172,7 +172,7 @@ const SinglePage = () => {
 
       {/* RIGHT */}
       {nextPage && (
-        <Link t={`/${nextPage._id}`}>
+        <Link to={`/${nextPage._id}`}>
           <div className="navigation right">
             <div className='icon__wrapper' style={{ right: 0 }}>
               <ArrowForwardIosIcon sx={{ color: '#797a7b' }} />
