@@ -1,21 +1,27 @@
-// export const getPrevPage = (data, currentIdx) => {
-//   let nextIdx = Math.min(currentIdx + 1, data.length - 1)
-//   return data[nextIdx]
-// }
+export const getPrevPage = (data, currentIdx) => {
+  let nextIdx = Math.min(currentIdx + 1, data.length - 1)
+  if (currentIdx === data.length - 1) {
+    return;
+  }
+  return data[nextIdx]
+}
 
-// export const getNextPage = (data, currentIdx) => {
-//   let prevIdx = Math.max(currentIdx - 1, 0)
-//   return data[prevIdx]
-// }
+export const getNextPage = (data, currentIdx) => {
+  let prevIdx = Math.max(currentIdx - 1, 0)
+  if (currentIdx === 0) {
+    return;
+  }
+  return data[prevIdx]
+}
 
-// export const truncate = (str, n) => {
-//   return str.length >= n ? str.substring(0, n) + ' ...' : str + ' ...'
-// }
+export const truncate = (str, n) => {
+  return str.length >= n ? str.substring(0, n) + ' ...' : str + ' ...'
+}
 
-// export const getUnique = (data, field) => {
-//   let filteredData = data.map(el => el[field])
-//   return [...new Set(filteredData.flat())]
-// }
+export const getUnique = (data, field) => {
+  let filteredData = data.map(el => el[field])
+  return [...new Set(filteredData.flat())]
+}
 const formatNumber = (num) => {
   // hundreds
   if (num < 1000) {

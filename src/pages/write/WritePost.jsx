@@ -17,7 +17,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Editor from '../../components/editor/Editor';
 import { useStyles } from './Write.styles'
 
-let categories = ["Art", 'Culture', 'Lifestyle', 'Health', "News", 'Travel', 'Photography']
+let categories = ["Art", 'Culture', 'Lifestyle', 'Health', "News", 'Travel', 'Poetry', 'Psychology']
 
 const WritePost = () => {
     const [title, setTitle] = useState("")

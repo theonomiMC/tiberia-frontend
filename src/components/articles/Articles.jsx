@@ -24,7 +24,6 @@ const Articles = ({ posts }) => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     };
 
-    console.log(posts, posts)
     if (!posts.length) {
         return <Box>
             <CircularProgress sx={{ margin: '5em auto', display: 'block' }} color='error' />

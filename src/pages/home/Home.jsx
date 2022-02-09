@@ -5,11 +5,14 @@ import { AuthContext } from "../../context/AuthContext";
 import Posts from "../../components/Posts/Posts";
 import Loader from "../../components/Loader";
 import Footer from '../../components/footer/Footer'
+// import Articles from "../../components/articles/Articles";
+// import VideoSlide from "../../components/slide/VideoSlide";
 const LazyDashboard = lazy(() => import("../../components/dashboard/Dashboard"));
 
 const Home = () => {
   const { SERVER } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
+ 
   let { search } = useLocation();
 
   useEffect(() => {
@@ -26,7 +29,7 @@ const Home = () => {
         <LazyDashboard posts={posts} />
       </Suspense>
       <Posts posts={posts} search={search} />
-      {/* <Posts posts={posts} search={search} /> */}
+     {/* <VideoSlide /> */}
       <Footer />
     </>
   )

@@ -31,7 +31,7 @@ const Slide = () => {
                                 <Link to={`/${p._id}`}>{p?.title}</Link>
                             </Typography>
                             <Typography variant='caption' className={classes.subtitle}>
-                                {new Date(p.updatedAt).toDateString()} - Author: {p.author}
+                                {new Date(p.updatedAt).toDateString()}
                             </Typography>
                         </div>
                     </div>

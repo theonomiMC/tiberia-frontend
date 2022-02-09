@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
 import { Button, Container, Typography, Input, Select, MenuItem } from "@mui/material";
@@ -12,22 +12,12 @@ import parse from 'html-react-parser';
 import Editor from '../../components/editor/Editor';
 import { useStyles } from './Page.styles'
 import './SinglePage.css'
-// import { getNextPage, getPrevPage } from '../../utils'
+import { getNextPage, getPrevPage } from '../../utils'
 import SettingsModal from '../../components/modal/SettingsModal';
 import ActionBtns from '../../components/ActionBtns';
 import CircularProgress from '@mui/material/CircularProgress';
 
 let categories = ["Art", 'Culture', 'Lifestyle', 'Health', "News", 'Travel']
-
-const getPrevPage = (data, currentIdx) => {
-  let nextIdx = Math.min(currentIdx + 1, data.length - 1)
-  return data[nextIdx]
-}
-
-const getNextPage = (data, currentIdx) => {
-  let prevIdx = Math.max(currentIdx - 1, 0)
-  return data[prevIdx]
-}
 
 const SinglePage = () => {
   let { id } = useParams();
@@ -167,7 +157,7 @@ const SinglePage = () => {
       {/* Left / Right Navigation Arrows */}
       {/* LEFT */}
       {prevPage && (
-        <a href={`/${prevPage._id}`}>
+        <Link to={`/${prevPage._id}`}>
           <div className="navigation left">
             <div className='icon__wrapper'>
               <ArrowBackIosIcon style={{ color: '#797a7b', marginLeft: '.1em' }} />
@@ -177,12 +167,12 @@ const SinglePage = () => {
               {prevPage.title}
             </div>
           </div>
-        </a>
+        </Link>
       )}
 
       {/* RIGHT */}
       {nextPage && (
-        <a href={`/${nextPage._id}`}>
+        <Link t={`/${nextPage._id}`}>
           <div className="navigation right">
             <div className='icon__wrapper' style={{ right: 0 }}>
               <ArrowForwardIosIcon sx={{ color: '#797a7b' }} />
@@ -192,7 +182,7 @@ const SinglePage = () => {
               {nextPage.title}
             </div>
           </div>
-        </a>
+        </Link>
       )}
 
     </Container >
