@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import axios from 'axios'
 import {
     Button,
@@ -21,7 +21,7 @@ let categories = ["Art", 'Culture', 'Lifestyle', 'Health', "News", 'Travel', 'Po
 
 const WritePost = () => {
     const [title, setTitle] = useState("")
-    const [image, setImage] = useState("")
+    const [file, setFile] = useState("")
     const [category, setCategory] = useState("")
     const { auth, SERVER } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -30,15 +30,29 @@ const WritePost = () => {
 
     const handlePost = async (e) => {
         e.preventDefault();
-        const newPost = {
-            title,
-            text: body.value,
-            image,
-            categories: category || 'News'
-        }
+        const imageData = new FormData()
+        imageData.append('file', file)
+        imageData.append('upload_preset', 'tiberia-assets')
+        imageData.append('cloud_name', 'tiberiacloud')
+
         try {
+            let res = await axios.post(
+                "https://api.cloudinary.com/v1_1/tiberiacloud/upload",
+                imageData
+            )
+            const { url } = res.data
+            console.log(url)
+            const newPost = {
+                title,
+                text: body.value,
+                image: url,
+                categories: category || 'News'
+            }
+
             await axios.post(`${SERVER}/api/posts`, newPost, { headers: { "x-auth-token": `${auth.token}` } })
             navigate('/')
+
+
         } catch (err) {
             console.log(err.message)
         }
@@ -47,20 +61,23 @@ const WritePost = () => {
     const handleBody = value => {
         setBody({ value });
     };
+   
     return (
         <div className={`${classes.root} write-wrapper`}>
             <Container component="main" maxWidth="md" sx={{ backgroundColor: '#f1f1f1a8' }}>
                 <Box sx={{
                     marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-
+                    alignItems: 'center'
                 }}>
                     <Typography component="h1" variant="h5" marginY={'2em'} >
                         <span className='bigLetter'>W</span>rite something ...
                     </Typography>
-                    <Box component="form" onSubmit={handlePost} sx={{ my: '2em', p: '1em' }}>
+                    <Box component="form"
+                        onSubmit={handlePost}
+                        sx={{
+                            my: '2em', p: '1em',
+                            alignItems: 'flex-start',
+                        }}>
                         <Input
                             type='text'
                             value={title}
@@ -70,26 +87,35 @@ const WritePost = () => {
                             fullWidth
                             placeholder="Post title"
                             sx={{ marginBottom: '1em' }}
-                            disableUnderline
-                            multiline
+
                         />
+
+                        {/* Upload image to cloudinary */}
+
                         <Input
-                            type='text'
-                            value={image}
-                            onChange={e => setImage(e.target.value)}
-                            name="image"
-                            sx={{ mb: '2em' }}
+                            type='file'
+                            accept="image/*"
+                            onChange={e => setFile(e.target.files[0])}
+                            id="upload-image"
+                            sx={{ mb: '2em', display: 'none' }}
                             required
-                            fullWidth
-                            placeholder="Image address"
-                            disableUnderline
+
                         />
-                        <Select sx={{ mb: '1em', minWidth: 120, }}
+                        <div className={classes.label}>
+                            <label htmlFor='upload-image' >
+                                <FileUploadIcon fontSize='large' />
+                            </label>
+                            <span>{file?.name || 'Upload Image'}</span>
+ 
+                        </div>
+                        <Select sx={{ mb: '1em', border: 0, }}
                             labelId="category"
                             id="category"
                             value={category}
                             onChange={e => setCategory(e.target.value)}
                             displayEmpty
+                            size='small'
+                            autoWidth
                         >
                             <MenuItem value="">
                                 <em>Category</em>
