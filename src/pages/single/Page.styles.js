@@ -2,7 +2,6 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
     root: {
-
         display: 'flex',
         maxWidth: 1024,
         minHeight: '100vh',
@@ -24,7 +23,6 @@ export const useStyles = makeStyles({
     },
     bottomCenter: {
         position: 'absolute',
-
         width: '100%',
         top: '70%',
         left: 0,
@@ -33,6 +31,12 @@ export const useStyles = makeStyles({
         marginRight: 'auto',
         textAlign: 'center',
         background: '#edeff4',
+        "& span":{
+            display:'block',
+            color: '#777',
+            fontStyle: 'oblique',
+            letterSpacing:1.3,
+        },
         "& h1": {
             padding: '1em',
         },
@@ -46,6 +50,7 @@ export const useStyles = makeStyles({
         width: '70%',
         zIndex: 12,
         textAlign: 'center',
+       
         "& img": {
             display: 'block',
             margin: '0 auto',

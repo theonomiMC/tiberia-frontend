@@ -12,7 +12,6 @@ const LazyDashboard = lazy(() => import("../../components/dashboard/Dashboard"))
 const Home = () => {
   const { SERVER } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
- 
   let { search } = useLocation();
 
   useEffect(() => {
@@ -26,10 +25,10 @@ const Home = () => {
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <LazyDashboard posts={posts} />
+        <LazyDashboard />
       </Suspense>
       <Posts posts={posts} search={search} />
-     {/* <VideoSlide /> */}
+      {/* <VideoSlide /> */}
       <Footer />
     </>
   )

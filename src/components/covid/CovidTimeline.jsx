@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import formatNumber from '../../utils';
 import { useStyles } from './Covid.styles';
 
 
-const CovidTimeline = ({ stat }) => {
+const CovidTimeline = memo(({ stat }) => {
     const classes = useStyles()
 
     return (
@@ -26,6 +26,6 @@ const CovidTimeline = ({ stat }) => {
             </Grid>}
         </Grid >
     )
-};
+});
 
 export default CovidTimeline;

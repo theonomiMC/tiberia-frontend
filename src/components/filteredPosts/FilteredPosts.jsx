@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom'
 import parse from 'html-react-parser';
 // import { truncate } from '../../utils';
@@ -16,14 +16,15 @@ const FilteredPosts = ({ posts }) => {
     const postsPerPage = 3
     const count = Math.ceil(posts.length / postsPerPage)
     const _POSTS = usePagination(posts, postsPerPage)
-
+    const boxRef = useRef(null)
     const handleChange = (e, p) => {
         setPage(p);
         _POSTS.customPage(p);
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        boxRef.current.scrollIntoView()
     };
+
     return (
-        <Box className={classes.root}>
+        <Box className={classes.root} ref={boxRef}>
             {_POSTS.currentData() && _POSTS.currentData().map(post => (
                 <Box className={classes.bigContent} key={post._id}>
                     <img src={post?.image} alt={`${post?.title}`} />

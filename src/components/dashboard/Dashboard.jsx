@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Slide from '../slide/Slide'
 import { Container } from "@mui/material";
 import { useStyles } from './Dashboard.styles'
 
 
-const Dashboard = ({ posts }) => {
+const Dashboard = memo(() => {
     const classes = useStyles()
     return (
         <Container disableGutters maxWidth='md' className={classes.root}>
@@ -13,6 +13,6 @@ const Dashboard = ({ posts }) => {
 
 
     );
-};
+});
 
 export default Dashboard;

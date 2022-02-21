@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import usePagination from '../../hooks/usePagination';
-import parse from 'html-react-parser';
+import MainPost from "./MainPost";
 import { Box, Pagination, Divider, Typography } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './Articles.styles'
-
-
-const truncate = (str, n) => {
-    return str.length >= n ? str.substring(0, n) + ' ...' : str + ' ...'
-}
 
 const Articles = ({ posts }) => {
     const classes = useStyles()
     const [page, setPage] = useState(1);
     const postsPerPage = 4
     const count = Math.ceil(posts.length / postsPerPage)
-    const _POSTS = usePagination(posts, postsPerPage)
-
+    const _POSTS = usePagination(posts.slice(4), postsPerPage)
+    const boxRef = useRef(null)
     const handleChange = (e, p) => {
         setPage(p);
         _POSTS.customPage(p);
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        boxRef.current.scrollIntoView()
     };
 
     if (!posts.length) {
@@ -30,7 +25,7 @@ const Articles = ({ posts }) => {
         </Box>
     }
     return (
-        <Box className={classes.root}>
+        <Box className={classes.root} ref={boxRef}>
             <Box position='static' sx={{ xs: { width: '100%' }, md: { width: '50%' } }}>
                 {_POSTS.currentData().length > 0 && (_POSTS.currentData().map(post => (
                     <React.Fragment key={post._id}>
@@ -60,25 +55,7 @@ const Articles = ({ posts }) => {
                 }
             </Box>
             {/* post on big boarder */}
-            <Divider variant='middle' flexItem sx={{ marginLeft: 0 }} orientation={'vertical'} ></Divider>
-            {
-                posts.length && <Box className={classes.bigContent}>
-                    <img src={posts[0]?.image} alt={`${posts[0]?.title}`} />
-                    <Box mr={1}>
-                        <Typography variant="h6">
-                            <Link to={`/${posts[0]?._id}`}>{posts[0]?.title}</Link>
-                        </Typography>
-                        <Typography variant="caption" component='div' sx={{ mb: 2, mt: 1 }}>
-                            {new Date(posts[0]?.updatedAt).toLocaleDateString()}
-                        </Typography>
-                        <Box sx={{
-                            fontSize: '0.85rem',
-                            fontWeight: 'normal',
-                            color: '#757d89', lineHeight: 1.6
-                        }}>{posts[0]?.text && parse(truncate(posts[0]?.text, 420))}</Box>
-                    </Box>
-                </Box>
-            }
+            <MainPost mainPost={posts[3]} />
         </Box >
     )
 };

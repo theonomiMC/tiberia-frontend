@@ -1,12 +1,12 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect } from "react"
 import { Reducer } from './Reducer'
 
 const initialState = {
     auth: JSON.parse(localStorage.getItem('auth')) || null,
 }
 export const AuthContext = createContext(initialState)
-// const SERVER = 'http://localhost:5000'
-const SERVER = 'https://tiberia-server.herokuapp.com'
+const SERVER = 'http://localhost:5000'
+// const SERVER = 'https://tiberia-server.herokuapp.com'
 
 export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState)
@@ -18,7 +18,7 @@ export const AppProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={{
             auth: state.auth,
-            success:state.success,
+            success: state.success,
             dispatch, SERVER
         }}>
             {children}

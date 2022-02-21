@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import UseAnimations from "react-useanimations";
 import trash from 'react-useanimations/lib/trash'
 import edit from 'react-useanimations/lib/edit'
 
-const ActionBtns = ({ handleDelete, setEditMode, ...rest }) => {
+const ActionBtns = memo(({ handleDelete, setEditMode, ...rest }) => {
+    console.log('actionsbtn')
     return (
         <>
 
@@ -29,6 +30,6 @@ const ActionBtns = ({ handleDelete, setEditMode, ...rest }) => {
         </>
 
     )
-};
+});
 
 export default ActionBtns;

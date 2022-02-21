@@ -1,23 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
-import { Button, Container, Typography, Input, Select, MenuItem } from "@mui/material";
-import CheckIcon from '@mui/icons-material/Check';
-import ClearIcon from '@mui/icons-material/Clear';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Container, Typography, Input, Select, MenuItem } from "@mui/material";
 import { Box } from '@mui/system';
 import parse from 'html-react-parser';
 import Editor from '../../components/editor/Editor';
 import { useStyles } from './Page.styles'
-import './SinglePage.css'
-import { getNextPage, getPrevPage } from '../../utils'
+import EditButtons from '../../components/EditButtons';
 import SettingsModal from '../../components/modal/SettingsModal';
 import ActionBtns from '../../components/ActionBtns';
 import CircularProgress from '@mui/material/CircularProgress';
-
-let categories = ["Art", 'Culture', 'Lifestyle', 'Health', "News", 'Travel']
+import categories from '../../categories'
+import Navigations from '../../components/Navigations';
+import './SinglePage.css'
 
 const SinglePage = () => {
   let { id } = useParams();
@@ -31,9 +27,6 @@ const SinglePage = () => {
   const [posts, setPosts] = useState([])
 
   let currentIdx = posts.findIndex(el => el.title === singlePost.title);
-  let nextPage = getNextPage(posts, currentIdx);
-  let prevPage = getPrevPage(posts, currentIdx);
-
   const classes = useStyles()
 
   useEffect(() => {
@@ -48,7 +41,6 @@ const SinglePage = () => {
     const getSinglePost = async () => {
       try {
         const { data } = await axios.get(`${SERVER}/api/posts/${id}`)
-
         setSinglePost(data)
         setTitle(data.title)
         setText({ value: data.text })
@@ -69,7 +61,9 @@ const SinglePage = () => {
 
   const handleEdit = async () => {
     try {
-      await axios.put(`${SERVER}/api/posts/${singlePost._id}`, { title, text: text.value, categories: category || 'News' }, { headers: { "x-auth-token": `${auth.token}` } })
+      await axios.put(`${SERVER}/api/posts/${singlePost._id}`,
+        { title, text: text.value, categories: category || 'News' },
+        { headers: { "x-auth-token": `${auth.token}` } })
       await setEditMode(false)
       window.location.reload()
     } catch (err) {
@@ -91,9 +85,7 @@ const SinglePage = () => {
       <Box sx={{ position: 'relative' }}>
         <img src={singlePost.image} alt={singlePost.title} />
         <Box className={classes.bottomCenter}>
-
           {editMode ? <Input
-
             type='text'
             multiline
             sx={{ p: '1em .5em', my: '1em', width: '95%' }}
@@ -115,34 +107,21 @@ const SinglePage = () => {
             {categories.map(cat => <MenuItem key={cat} value={cat}>{cat}</MenuItem>)}
           </Select>
           }
-          <Typography variant='caption' sx={{ display: 'block' }}>Author: {singlePost?.author} - {singlePost?.createdAt && new Date(singlePost?.createdAt).toDateString()}</Typography>
+          <Typography variant='caption'>
+            {singlePost?.categories}
+          </Typography>
+          <Typography variant='caption'>
+            {singlePost?.createdAt && new Date(singlePost?.createdAt).toLocaleDateString()}
+          </Typography>
           <article className='article'>
             {
               editMode ? <Editor value={text.value} onChange={value => setText({ value })} /> :
                 singlePost.text && parse(singlePost.text)
             }
             {/* Edid buttons */}
-            {editMode && <div className='settings-btns'>
-              <Button color="success"
-
-                variant='outlined'
-                endIcon={<CheckIcon fontSize="inherit" />} aria-label="update" onClick={handleEdit} size="large">
-                Update
-              </Button>
-              <Button color="error"
-                variant='outlined'
-                endIcon={<ClearIcon fontSize="inherit" />} aria-label="delete"
-                onClick={() => setEditMode(false)}
-                size="large"
-              >
-                Cencel
-              </Button>
-            </div>}
+            {editMode && <EditButtons handleEdit={handleEdit} setEditMode={setEditMode} />}
           </article>
-
-
         </Box>
-
       </Box>
 
       {/* SETTINGS */}
@@ -153,38 +132,8 @@ const SinglePage = () => {
           </SettingsModal>
         </>
       }
-
       {/* Left / Right Navigation Arrows */}
-      {/* LEFT */}
-      {prevPage && (
-        <Link to={`/${prevPage._id}`}>
-          <div className="navigation left">
-            <div className='icon__wrapper'>
-              <ArrowBackIosIcon style={{ color: '#797a7b', marginLeft: '.1em' }} />
-            </div>
-            <div className='content'>
-              <Typography variant='caption'>{new Date(prevPage.createdAt).toDateString()}</Typography>
-              {prevPage.title}
-            </div>
-          </div>
-        </Link>
-      )}
-
-      {/* RIGHT */}
-      {nextPage && (
-        <Link to={`/${nextPage._id}`}>
-          <div className="navigation right">
-            <div className='icon__wrapper' style={{ right: 0 }}>
-              <ArrowForwardIosIcon sx={{ color: '#797a7b' }} />
-            </div>
-            <div className='content'>
-              <Typography variant='caption'>{new Date(nextPage.createdAt).toDateString()}</Typography>
-              {nextPage.title}
-            </div>
-          </div>
-        </Link>
-      )}
-
+      <Navigations posts={posts} currentIdx={currentIdx} />
     </Container >
   )
 };
