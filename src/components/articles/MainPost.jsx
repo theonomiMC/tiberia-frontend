@@ -13,7 +13,7 @@ const MainPost = memo(({ mainPost }) => {
             <Divider variant='middle' flexItem sx={{ marginLeft: 0 }} orientation={'vertical'} ></Divider>
             {
                 <Box className={classes.bigContent}>
-                    <img src={mainPost?.image} alt={`${mainPost?.title}`} />
+                    <img src={mainPost?.image} alt={`${mainPost?.title}`} loading='lazy' />
                     <Box mr={1}>
                         <Typography variant="h6">
                             <Link to={`/${mainPost?._id}`}>{mainPost?.title}</Link>

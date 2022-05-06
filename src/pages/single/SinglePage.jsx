@@ -83,7 +83,7 @@ const SinglePage = () => {
     <Container disableGutters className={classes.root} maxWidth={false}>
 
       <Box sx={{ position: 'relative' }}>
-        <img src={singlePost.image} alt={singlePost.title} />
+        <img src={singlePost.image} alt={singlePost.title} loading='lazy' />
         <Box className={classes.bottomCenter}>
           {editMode ? <Input
             type='text'
