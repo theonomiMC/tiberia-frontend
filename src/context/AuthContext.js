@@ -6,7 +6,7 @@ const initialState = {
 };
 export const AuthContext = createContext(initialState);
 // const SERVER = 'http://localhost:5000'
-const SERVER = "https://tiberia-server.herokuapp.com";
+const SERVER = "https://tiberia-server.onrender.com";
 
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
